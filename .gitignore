@@ -1,0 +1,5 @@
+mysql/data
+elasticsearch/data
+apache/sites-available/*
+apache/sites-enabled/*
+*.tgz

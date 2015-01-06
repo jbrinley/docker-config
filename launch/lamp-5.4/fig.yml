@@ -1,0 +1,41 @@
+elasticsearch:
+  image: jbrinley/elasticsearch:1.3.7
+  volumes:
+    - /Users/jbrinley/system/elasticsearch/data:/data
+  ports:
+    - "9200:9200"
+    - "9300:9300"
+memcached:
+  image: memcached:1.4
+  ports:
+    - "11211:11211"
+mysqldata:
+  image: jbrinley/mysql_datastore
+  volumes:
+    - /Users/jbrinley/system/mysql/data:/var/lib/mysql
+mysql:
+  image: jbrinley/mysql:5.5
+  volumes_from:
+    - mysqldata
+  ports:
+    - "3306:3306"
+  environment:
+    - MYSQL_ROOT_PASSWORD=password
+webdata:
+  image: jbrinley/web_datastore
+  volumes:
+    - /Users/jbrinley/projects:/srv/www
+web:
+  image: jbrinley/php:5.4-apache
+  ports:
+    - "80:80"
+    - "9090:9090"
+  volumes_from:
+    - webdata
+  volumes:
+    - /Users/jbrinley/system/apache/sites-enabled:/etc/apache2/sites-enabled/
+    - /Users/jbrinley/system/php/php.ini:/usr/local/etc/php/conf.d/php.ini
+  links:
+    - mysql
+    - elasticsearch
+    - memcached
