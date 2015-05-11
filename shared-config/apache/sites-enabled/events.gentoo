@@ -1,0 +1,26 @@
+<VirtualHost *:80>
+
+  ServerName events.gentoo
+  ServerAlias www.events.gentoo
+	ServerAlias tests.events.tribe
+  DocumentRoot /srv/www/tribe/events
+
+  RewriteEngine On
+  RewriteCond %{HTTP_HOST} ^www\.events\.gentoo$ [NC]
+  RewriteRule ^(.*)$ http://events.gentoo$1 [R=301,L]
+
+  UseCanonicalName Off
+
+  <IfModule mod_ssl.c>
+    SSLEngine off
+  </IfModule>
+
+  <Directory "/srv/www/tribe/events">
+    Options FollowSymLinks
+    AllowOverride All
+    Order allow,deny
+    Allow from all
+    AcceptPathInfo On
+  </Directory>
+
+</VirtualHost>

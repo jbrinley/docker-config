@@ -1,0 +1,21 @@
+php:
+  image: jbrinley/php:5.5-fpm
+  volumes:
+    - ~/projects/tribe/steelcase-com:/srv/www/default/application
+    - php/php.ini:/usr/local/etc/php/conf.d/php.ini:ro
+  dns:
+    - 10.254.254.254
+    - 8.8.8.8
+  external_links:
+    - web_mysql_1:mysql
+    - web_elasticsearch_1:elasticsearch
+    - web_memcached_1:memcached
+nginx:
+  image: nginx:latest
+  ports:
+    - "80:80"
+  volumes:
+    - nginx:/etc/nginx:ro
+    - ~/projects/tribe/steelcase-com:/srv/www/default/application:ro
+  links:
+    - php

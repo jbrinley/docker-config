@@ -1,0 +1,14 @@
+web:
+  image: jbrinley/php:5.5-apache
+  ports:
+    - "80:80"
+  dns:
+    - 10.254.254.254
+    - 8.8.8.8
+  volumes:
+    - apache/sites-enabled:/etc/apache2/sites-enabled/
+    - php/php.ini:/usr/local/etc/php/conf.d/php.ini
+    - ~/projects/tribe/sls:/srv/www/default/application
+  external_links:
+    - web_mysql_1:mysql
+    - web_memcached_1:memcached

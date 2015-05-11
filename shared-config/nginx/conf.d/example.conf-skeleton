@@ -1,0 +1,10 @@
+server {
+	listen 80;
+	server_name mysite.dev;
+
+	# ABSPATH is at /srv/www/mysite/wp
+	# WP_CONTENT_DIR is at /srv/www/mysite/content
+	set $directory mysite;
+
+	include wp-skeleton.conf;
+}

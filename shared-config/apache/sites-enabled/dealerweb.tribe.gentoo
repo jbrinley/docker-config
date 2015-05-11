@@ -1,0 +1,28 @@
+<VirtualHost *:80>
+
+  ServerName dealerweb.tribe.gentoo
+  ServerAlias *.dealerweb.tribe.gentoo
+  ServerAlias steel.tribe.gentoo
+  ServerAlias *.steel.tribe.gentoo
+  ServerAlias dealer11.tribe.gentoo
+  DocumentRoot /srv/www/tribe/dealerweb
+
+  RewriteEngine On
+  RewriteCond %{HTTP_HOST} ^www\.dealerweb\.tribe.gentoo$ [NC]
+  RewriteRule ^(.*)$ http://dealerweb.tribe.gentoo$1 [R=301,L]
+
+  UseCanonicalName Off
+
+  <IfModule mod_ssl.c>
+    SSLEngine off
+  </IfModule>
+
+  <Directory "/srv/www/tribe/dealerweb">
+    Options FollowSymLinks
+    AllowOverride All
+    Order allow,deny
+    Allow from all
+    AcceptPathInfo On
+  </Directory>
+
+</VirtualHost>

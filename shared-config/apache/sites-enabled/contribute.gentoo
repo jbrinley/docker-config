@@ -1,0 +1,26 @@
+<VirtualHost *:80>
+
+  ServerName contribute.gentoo
+  ServerAlias www.contribute.gentoo
+  DocumentRoot /srv/www/wp-contribute/src/
+
+  RewriteEngine On
+  RewriteCond %{HTTP_HOST} ^www\.contribute\.gentoo$ [NC]
+  RewriteRule ^(.*)$ http://contribute.gentoo$1 [R=301,L]
+
+  UseCanonicalName Off
+
+
+  <IfModule mod_ssl.c>
+    SSLEngine off
+  </IfModule>
+
+  <Directory "/srv/www/wp-contribute/src/">
+    Options FollowSymLinks
+    AllowOverride All
+    Order allow,deny
+    Allow from all
+    AcceptPathInfo On
+  </Directory>
+
+</VirtualHost>

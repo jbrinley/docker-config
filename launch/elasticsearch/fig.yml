@@ -1,8 +1,0 @@
-elasticsearch:
-  image: jbrinley/elasticsearch:1.3.7
-  volumes:
-    - /Users/jbrinley/system/elasticsearch/data:/data
-  ports:
-    - "9200:9200"
-    - "9300:9300"
-

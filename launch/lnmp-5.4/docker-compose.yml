@@ -1,0 +1,21 @@
+php:
+  image: jbrinley/php:5.4-fpm
+  volumes:
+    - ~/projects:/srv/www
+    - ../../shared-config/php/php.ini:/usr/local/etc/php/conf.d/php.ini:ro
+  dns:
+    - 10.254.254.254
+    - 8.8.8.8
+  external_links:
+    - web_mysql_1:mysql
+    - web_elasticsearch_1:elasticsearch
+    - web_memcached_1:memcached
+nginx:
+  image: nginx:latest
+  ports:
+    - "80:80"
+  volumes:
+    - ../../shared-config/nginx:/etc/nginx:ro
+    - ~/projects:/srv/www:ro
+  links:
+    - php

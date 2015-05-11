@@ -1,0 +1,11 @@
+web:
+  image: jbrinley/php:5.5-apache
+  ports:
+    - "80:80"
+  volumes:
+    - ../../shared-config/apache/sites-enabled:/etc/apache2/sites-enabled/:ro
+    - ../../shared-config/php/php.ini:/usr/local/etc/php/conf.d/php.ini:ro
+    - ~/projects:/srv/www
+  external_links:
+    - web_mysql_1:mysql
+    - web_memcached_1:memcached
