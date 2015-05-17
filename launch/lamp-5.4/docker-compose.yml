@@ -1,12 +1,16 @@
+memcached:
+  image: memcached:1.4
+  ports:
+    - "11211"
 web:
   image: jbrinley/php:5.4-apache
-  ports:
-    - "80:80"
-    - "9090:9090"
+  environment:
+    - VIRTUAL_HOST=*.gentoo,*.tribe
   volumes:
     - ../../shared-config/apache/sites-enabled:/etc/apache2/sites-enabled/:ro
     - ../../shared-config/php/php.ini:/usr/local/etc/php/conf.d/php.ini:ro
-    - /Users/jbrinley/projects:/srv/www
+    - ~/projects:/srv/www
+  links:
+    - memcached
   external_links:
-    - web_mysql_1:mysql
-    - web_memcached_1:memcached
+    - core_mysql_1:mysql

@@ -1,3 +1,7 @@
+memcached:
+  image: memcached:1.4
+  ports:
+    - "11211"
 php:
   image: jbrinley/php:5.4-fpm
   volumes:
@@ -6,14 +10,15 @@ php:
   dns:
     - 10.254.254.254
     - 8.8.8.8
+  links:
+    - memcached
   external_links:
-    - web_mysql_1:mysql
-    - web_elasticsearch_1:elasticsearch
-    - web_memcached_1:memcached
+    - core_mysql_1:mysql
+    - core_elasticsearch_1:elasticsearch
 nginx:
   image: nginx:latest
-  ports:
-    - "80:80"
+  environment:
+    - VIRTUAL_HOST=*.gentoo,*.tribe
   volumes:
     - ../../shared-config/nginx:/etc/nginx:ro
     - ~/projects:/srv/www:ro

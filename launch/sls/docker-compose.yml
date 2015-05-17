@@ -1,7 +1,11 @@
+memcached:
+  image: memcached:1.4
+  ports:
+    - "11211"
 web:
   image: jbrinley/php:5.5-apache
-  ports:
-    - "80:80"
+  environment:
+    - VIRTUAL_HOST=sls.tribe.gentoo
   dns:
     - 10.254.254.254
     - 8.8.8.8
@@ -9,6 +13,7 @@ web:
     - apache/sites-enabled:/etc/apache2/sites-enabled/
     - php/php.ini:/usr/local/etc/php/conf.d/php.ini
     - ~/projects/tribe/sls:/srv/www/default/application
+  links:
+    - memcached
   external_links:
-    - web_mysql_1:mysql
-    - web_memcached_1:memcached
+    - core_mysql_1:mysql

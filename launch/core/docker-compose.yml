@@ -4,10 +4,6 @@ elasticsearch:
     - elasticsearchdata
   ports:
     - "9200:9200"
-memcached:
-  image: memcached:1.4
-  ports:
-    - "11211:11211"
 mysql:
   image: mysql:5.5
   volumes_from:
@@ -16,3 +12,9 @@ mysql:
     - "3306:3306"
   environment:
     - MYSQL_ROOT_PASSWORD=password
+proxy:
+  image: jwilder/nginx-proxy
+  ports:
+    - "80:80"
+  volumes:
+    - /var/run/docker.sock:/tmp/docker.sock

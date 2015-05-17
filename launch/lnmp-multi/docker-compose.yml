@@ -1,3 +1,7 @@
+memcached:
+  image: memcached:1.4
+  ports:
+    - "11211"
 php55:
   image: jbrinley/php:5.5-fpm
   volumes:
@@ -5,10 +9,11 @@ php55:
   dns:
     - 10.254.254.254
     - 8.8.8.8
+  links:
+    - memcached
   external_links:
-    - web_mysql_1:mysql
-    - web_elasticsearch_1:elasticsearch
-    - web_memcached_1:memcached
+    - core_mysql_1:mysql
+    - core_elasticsearch_1:elasticsearch
 php54:
   image: jbrinley/php:5.4-fpm
   volumes:
@@ -16,10 +21,11 @@ php54:
   dns:
     - 10.254.254.254
     - 8.8.8.8
+  links:
+    - memcached
   external_links:
-    - web_mysql_1:mysql
-    - web_elasticsearch_1:elasticsearch
-    - web_memcached_1:memcached
+    - core_mysql_1:mysql
+    - core_elasticsearch_1:elasticsearch
 php53:
   image: jbrinley/php:5.3-fpm
   volumes:
@@ -27,10 +33,11 @@ php53:
   dns:
     - 10.254.254.254
     - 8.8.8.8
+  links:
+    - memcached
   external_links:
-    - web_mysql_1:mysql
-    - web_elasticsearch_1:elasticsearch
-    - web_memcached_1:memcached
+    - core_mysql_1:mysql
+    - core_elasticsearch_1:elasticsearch
 php52:
   image: jbrinley/php:5.2-fpm
   volumes:
@@ -38,10 +45,11 @@ php52:
   dns:
     - 10.254.254.254
     - 8.8.8.8
+  links:
+    - memcached
   external_links:
-    - web_mysql_1:mysql
-    - web_elasticsearch_1:elasticsearch
-    - web_memcached_1:memcached
+    - core_mysql_1:mysql
+    - core_elasticsearch_1:elasticsearch
 nginx:
   image: nginx:latest
   ports:
