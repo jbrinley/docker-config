@@ -1,6 +1,14 @@
 # Flexible Nginx & Apache Docker Config
 
-Something something something blah blah blah. `jbrinley` will probably have something awesome to place here.
+This is a basic framework for building a flexible local WordPress development environment using docker.
+
+An environment includes:
+
+PHP (versions 5.2-5.5 available)
+Nginx or Apache
+MySQL
+Memcached
+Elasticsearch
 
 ## Installation
 
@@ -47,6 +55,37 @@ boot2docker init
 boot2docker up
 ```
 
+#### Use NFS Mounts
+
+boots2docker automatically mounts your `/Users/` directory using vboxsf.
+To switch to the more performance nfs:
+ 
+Edit `/etc/exports`, adding:
+
+```
+/Users -mapall=[youruser]:[yourgroup] [boot2dockerip]
+```
+
+Example:
+
+```
+"/Users" -mapall=501:20 192.168.59.103
+```
+
+Then ssh into boot2docker and re-mount the directory:
+
+```
+boot2docker ssh
+```
+
+```
+sudo umount /Users
+sudo /usr/local/etc/init.d/nfs-client start
+sudo mount 192.168.59.3:/Users /Users -o rw,async,noatime,rsize=32768,wsize=32768,proto=tcp
+```
+
+You will need to re-run this every time you restart the virtual machine (but not when restarting containers).
+
 #### More info
 
 You can get more info about `boot2docker` at its [GitHub repo](https://github.com/boot2docker/boot2docker).
@@ -60,12 +99,13 @@ a data volume container for MySQL (named `mysqldata`) and one for Elasticsearch 
 #### MySQL
 
 ```
-docker run -i -t --name mysqldata -v /var/lib/mysql busybox /bin/sh
+docker create -v /var/lib/mysql --name mysqldata busybox /bin/true
 ```
 
 #### Elasticsearch
 
 ```
+docker create -v /usr/share/elasticsearch/data --name elasticsearchdata busybox /bin/true
 ```
 
 ## Running
