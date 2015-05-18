@@ -16,7 +16,7 @@ php:
 nginx:
   image: nginx:latest
   environment:
-    - VIRTUAL_HOST=*.gentoo,*.tribe,*.docker
+    - VIRTUAL_HOST=*.gentoo,*.tribe
   volumes:
     - ../shared-config/nginx:/etc/nginx:ro
     - ~/projects:/srv/www:ro
