@@ -1,11 +1,11 @@
 <VirtualHost *:80>
 
-  ServerName events.docker
+  ServerName events.tribe
   DocumentRoot /srv/www/tribe
 
   RewriteEngine On
-  RewriteCond %{HTTP_HOST} ^events\.docker$ [NC]
-  RewriteRule ^(.*)$ http://events.docker$1 [R=301,L]
+  RewriteCond %{HTTP_HOST} ^events\.tribe$ [NC]
+  RewriteRule ^(.*)$ http://events.tribe$1 [R=301,L]
 
   UseCanonicalName Off
 
