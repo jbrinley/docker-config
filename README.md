@@ -21,9 +21,17 @@ This Docker config setup makes some assumptions about your local environment.
 
 #### brew
 
-The installation script included in this repo assumes that you have brew installed. If you do not, you can get it [here](http://brew.sh/).
+The installation script included in this repo assumes that you have brew installed. If you do not,
+you can get it [here](http://brew.sh/).
 
 ### Run the install script
+
+Run it like so:
+
+```
+cd ~/system
+./install.sh
+```
 
 The install script does the following:
 
@@ -34,7 +42,8 @@ The install script does the following:
 1. Sets up a MySQL data volume (`mysqldata`)
 1. Sets up an Elasticsearch data volume (`elasticsearchdata`)
 
-If you _don't_ want to use the install script and instead want to install all of the pieces yourself, check the INSTALL.md file.
+If you _don't_ want to use the install script and instead want to install all of the pieces
+yourself, check the INSTALL.md file.
 
 ## boot2docker VM info
 
