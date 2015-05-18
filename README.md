@@ -111,17 +111,36 @@ nginx config directories:
 
 ### Starting your container
 
-Via command line, navigate to `~/system/launch/`. You'll see a pile of `*.sh` files. Those are used
-to run your containers. The `lnmp*.sh` files use nginx and the `lamp*.sh` files run apache. Simply
-execute the version of your choice:
+Via command line, navigate to `~/system/`. You'll see a `start.sh` file.
+Run that to spin up an Nginx/PHP 5.5 environment:
 
 ```
-./lnmp54.sh
+cd ~/system/
+./start.sh
 ```
 
 This will spin up the relevant containers (mysql, mysqldata, memcached, elasticsearch,
 elasticsearchdata, nginx, and php) in an interactive terminal where log information is sent to
 STDOUT.
+
+To spin up different configurations, you can specify those as a
+parameter to `start.sh`.  Example:
+
+```
+./start.sh lamp53
+```
+
+Parameters you can pass:
+* `lnmp55`: Nginx + PHP 5.5
+* `lnmp54`: Nginx + PHP 5.4
+* `lnmp53`: Nginx + PHP 5.3
+* `lnmp52`: Nginx + PHP 5.2
+* `lamp55`: Apache + PHP 5.5
+* `lamp54`: Apache + PHP 5.4
+* `lamp53`: Apache + PHP 5.3
+* `lamp52`: Apache + PHP 5.2
+
+Config files for those environments can be found in `~/system/launch/`.
 
 ### Viewing running containers
 
