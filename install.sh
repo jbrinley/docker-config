@@ -21,6 +21,9 @@ boot2docker init
 echo 'Starting boot2docker'
 boot2docker up
 
+# Set up docker environment variables
+eval "$(boot2docker shellinit 2> /dev/null)"
+
 # setup mysql data volume
 echo 'Setting up the mysqldata data volume';
 docker create -v /var/lib/mysql --name mysqldata busybox /bin/true
@@ -28,3 +31,8 @@ docker create -v /var/lib/mysql --name mysqldata busybox /bin/true
 # setup elasticsearch data volume
 echo 'Setting up the elasticsearchdata data volume';
 docker create -v /usr/share/elasticsearch/data --name elasticsearchdata busybox /bin/true
+
+echo '--------------------------'
+echo 'You will need to add the following vars to your .bashrc/.zshrc:'
+boot2docker shellinit
+echo '--------------------------'
