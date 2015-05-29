@@ -1,12 +1,12 @@
 <VirtualHost *:80>
 
-  ServerName sls.tribe.gentoo
+  ServerName sls.tribe
   ServerAlias sls-test.tribe
   DocumentRoot /srv/www/default/application
 
   RewriteEngine On
-  RewriteCond %{HTTP_HOST} ^www\.sls\.tribe.gentoo$ [NC]
-  RewriteRule ^(.*)$ http://sls.tribe.gentoo$1 [R=301,L]
+  RewriteCond %{HTTP_HOST} ^www\.sls\.tribe$ [NC]
+  RewriteRule ^(.*)$ http://sls.tribe$1 [R=301,L]
 
   UseCanonicalName Off
 

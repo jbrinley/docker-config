@@ -5,7 +5,7 @@ memcached:
 web:
   image: jbrinley/php:5.5-apache
   environment:
-    - VIRTUAL_HOST=sls.tribe.gentoo
+    - VIRTUAL_HOST=sls.tribe
   dns:
     - 10.254.254.254
     - 8.8.8.8
