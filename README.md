@@ -19,43 +19,48 @@ This Docker config setup makes some assumptions about your local environment.
 * You'll need to clone this repository (or symlink it) to `~/system/`.
 * Your projects (WordPress sites, projects, etc) will need to be in `~/projects/`
 
-### Install Docker
+#### brew
 
-You'll need docker (of course). Instructions on installation can be
-found on the [docker docs site](https://docs.docker.com). Here's the [OS X install docs](https://docs.docker.com/installation/mac/).
+The installation script included in this repo assumes that you have brew installed. If you do not,
+you can get it [here](http://brew.sh/).
 
-### Install `docker-compose`
+### Run the install script
 
-`docker-compose` allows for easy multi-container applications to be defined within a
-`docker-compose.yml` file, allowing you to spin up an application with a single command.  This
-repo relies on `docker-compose`, so you'll want that installed.
+Run it like so:
 
-Here are some [installation instructions](https://docs.docker.com/compose/install/).
+```
+cd ~/system
+./install.sh
+```
 
-### Install boot2docker VM
+The install script does the following:
+
+1. Installs Docker
+1. Installs boot2docker
+1. Installs Docker Compose
+1. Initializes and starts up `boot2docker`
+1. Sets up a MySQL data volume (`mysqldata`)
+1. Sets up an Elasticsearch data volume (`elasticsearchdata`)
+
+If you _don't_ want to use the install script and instead want to install all of the pieces
+yourself, check the INSTALL.md file.
+
+## boot2docker VM info
 
 `boot2docker` is a lightweight Linux distribution made specifically to
 run Docker containers.  It runs completely from RAM, weights ~27MB and
 boots in ~5s.
 
-You can get it at [boot2docker.io](http://boot2docker.io/).
+### Starting VM
 
-#### Initialize the VM
-
-Once you've installed `boot2docker`, you'll need to initialize the VM
-(you'll only have to do this once):
-
-```
-boot2docker init
-```
-
-#### Start VM
+While the install script _does_ start `boot2docker`, if you restart your
+machine, you'll need to start it up again.
 
 ```
 boot2docker up
 ```
 
-#### Use NFS Mounts
+### Use NFS Mounts
 
 boots2docker automatically mounts your `/Users/` directory using vboxsf.
 To switch to the more performance nfs:
@@ -86,28 +91,6 @@ sudo mount 192.168.59.3:/Users /Users -o rw,async,noatime,rsize=32768,wsize=3276
 
 You will need to re-run this every time you restart the virtual machine (but not when restarting containers).
 
-#### More info
-
-You can get more info about `boot2docker` at its [GitHub repo](https://github.com/boot2docker/boot2docker).
-
-### Create data volume containers
-
-Sometimes you want containers that contain persistent data. Luckily, you can create a container
-whose sole purpose is to store data for other containers. Running this config requires that you have
-a data volume container for MySQL (named `mysqldata`) and one for Elasticsearch (named `elasticsearchdata`).
-
-#### MySQL
-
-```
-docker create -v /var/lib/mysql --name mysqldata busybox /bin/true
-```
-
-#### Elasticsearch
-
-```
-docker create -v /usr/share/elasticsearch/data --name elasticsearchdata busybox /bin/true
-```
-
 ## Running
 
 ### Setup `/etc/hosts`
@@ -128,17 +111,36 @@ nginx config directories:
 
 ### Starting your container
 
-Via command line, navigate to `~/system/launch/`. You'll see a pile of `*.sh` files. Those are used
-to run your containers. The `lnmp*.sh` files use nginx and the `lamp*.sh` files run apache. Simply
-execute the version of your choice:
+Via command line, navigate to `~/system/`. You'll see a `start.sh` file.
+Run that to spin up an Nginx/PHP 5.5 environment:
 
 ```
-./lnmp54.sh
+cd ~/system/
+./start.sh
 ```
 
 This will spin up the relevant containers (mysql, mysqldata, memcached, elasticsearch,
 elasticsearchdata, nginx, and php) in an interactive terminal where log information is sent to
 STDOUT.
+
+To spin up different configurations, you can specify those as a
+parameter to `start.sh`.  Example:
+
+```
+./start.sh lamp53
+```
+
+Parameters you can pass:
+* `lnmp55`: Nginx + PHP 5.5
+* `lnmp54`: Nginx + PHP 5.4
+* `lnmp53`: Nginx + PHP 5.3
+* `lnmp52`: Nginx + PHP 5.2
+* `lamp55`: Apache + PHP 5.5
+* `lamp54`: Apache + PHP 5.4
+* `lamp53`: Apache + PHP 5.3
+* `lamp52`: Apache + PHP 5.2
+
+Config files for those environments can be found in `~/system/launch/`.
 
 ### Viewing running containers
 
