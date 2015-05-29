@@ -17,4 +17,6 @@ proxy:
   ports:
     - "80:80"
   volumes:
+    - nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    - nginx/proxy_settings.conf:/etc/nginx/conf.d/proxy_settings.conf:ro
     - /var/run/docker.sock:/tmp/docker.sock
