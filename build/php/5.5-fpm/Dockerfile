@@ -19,6 +19,7 @@ RUN docker-php-ext-install mbstring \
     && docker-php-ext-install exif \
     && docker-php-ext-install gettext \
     && docker-php-ext-install mysqli \
+    && docker-php-ext-install opcache \
     && docker-php-ext-install pdo_mysql
 
 # WP CLI
