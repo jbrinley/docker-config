@@ -1,8 +1,6 @@
 #!/bin/bash
 
-cd ~/system/launch/core
-docker-compose --project-name=core up -d --no-recreate
+LAUNCHDIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
-cd ~/system/launch/lnmp-5.5
-docker-compose --project-name=lnmp55 up
+/bin/bash "$LAUNCHDIR/lnmp55.sh"
 

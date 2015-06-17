@@ -16,7 +16,7 @@ Elasticsearch
 
 This Docker config setup makes some assumptions about your local environment.
 
-* You'll need to clone this repository (or symlink it) to `~/system/`.
+* You'll need to clone this repository (or symlink it) to a path in your home directory (e.g., `~/system/`).
 * Your projects (WordPress sites, projects, etc) will need to be in `~/projects/`
 
 #### brew
@@ -26,7 +26,7 @@ you can get it [here](http://brew.sh/).
 
 ### Run the install script
 
-Run it like so:
+Run it like so (assuming this file is in the directory `~/system`):
 
 ```
 cd ~/system
@@ -106,12 +106,12 @@ boot2docker ip
 The hostnames that are used in this repo can be found in the apache and
 nginx config directories:
 
-* nginx: `~/system/shared-config/nginx/conf.d/`
-* apache: `~/system/shared-config/apache/sites-enabled/`
+* nginx: `shared-config/nginx/conf.d/`
+* apache: `shared-config/apache/sites-enabled/`
 
 ### Starting your container
 
-Via command line, navigate to `~/system/`. You'll see a `start.sh` file.
+Via command line, navigate to this repo's directory. You'll see a `start.sh` file.
 Run that to spin up an Nginx/PHP 5.5 environment:
 
 ```
@@ -140,7 +140,7 @@ Parameters you can pass:
 * `lamp53`: Apache + PHP 5.3
 * `lamp52`: Apache + PHP 5.2
 
-Config files for those environments can be found in `~/system/launch/`.
+Config files for those environments can be found in `launch/`.
 
 ### Viewing running containers
 

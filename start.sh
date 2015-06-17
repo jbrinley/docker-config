@@ -1,8 +1,10 @@
 #!/bin/bash
 
+REPODIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+
 if [[ $1 ]]
 then
-	~/system/launch/$1.sh
+	/bin/bash "$REPODIR/launch/$1.sh"
 else
-	~/system/launch/lnmp55.sh
+	/bin/bash "$REPODIR/launch/lnmp.sh"
 fi

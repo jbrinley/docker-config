@@ -1,8 +1,10 @@
 #!/bin/bash
 
-cd ~/system/launch/core
-docker-compose --project-name=core up -d --no-recreate
+LAUNCHDIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
-cd ~/system/launch/lnmp-multi
+/bin/bash "$LAUNCHDIR/core.sh"
+
+cd "$LAUNCHDIR/lnmp-multi"
+echo "Starting project: lnmp_multi"
 docker-compose --project-name=lnmp_multi up
 

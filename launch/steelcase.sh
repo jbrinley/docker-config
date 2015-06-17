@@ -1,8 +1,10 @@
 #!/bin/bash
 
-cd ~/system/launch/core
-docker-compose --project-name=core up -d --no-recreate
+LAUNCHDIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
-cd ~/system/launch/steelcase
+/bin/bash "$LAUNCHDIR/core.sh"
+
+cd "$LAUNCHDIR/steelcase"
+echo "Starting project: steelcase"
 docker-compose --project-name=steelcase up
 
