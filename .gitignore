@@ -1,4 +1,7 @@
 *.tar
 *.tgz
+*.gz
 
 /backups
+/shared-config/nginx/conf.d/*.conf
+/shared-config/apache/sites-enabled/*

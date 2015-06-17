@@ -1,10 +1,13 @@
 server {
 	listen 80;
-	server_name mysite.dev;
+	server_name example.tribe;
 
-	# ABSPATH is at /srv/www/mysite/wp
-	# WP_CONTENT_DIR is at /srv/www/mysite/content
-	set $directory mysite;
+	# Files are on host at ~/projects/example
+	# ABSPATH is at /srv/www/example/wp
+	# WP_CONTENT_DIR is at /srv/www/example/content
+	set $directory example;
 
 	include wp-skeleton.conf;
+
+	# add additional server config as appropriate
 }
