@@ -1,0 +1,5 @@
+[mysqld]
+
+# WordPress's database includes many fields that support MEDIUMTEXT (i.e., ~16M)
+
+max_allowed_packet=16M

@@ -6,6 +6,8 @@ elasticsearch:
     - "9200:9200"
 mysql:
   image: mysql:5.5
+  volumes:
+    - mysql/mysql.cnf:/etc/mysql/conf.d/mysql.cnf:ro
   volumes_from:
     - mysqldata
   ports:
