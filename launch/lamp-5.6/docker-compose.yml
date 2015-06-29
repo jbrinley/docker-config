@@ -1,0 +1,13 @@
+memcached:
+  extends:
+    file: ../common.yml
+    service: memcached
+web:
+  extends:
+    file: ../common.yml
+    service: php
+  image: jbrinley/php:5.6-apache
+  links:
+    - memcached
+  volumes:
+    - ../../shared-config/apache/sites-enabled:/etc/apache2/sites-enabled/:ro

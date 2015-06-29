@@ -2,6 +2,18 @@ memcached:
   image: memcached:1.4
   ports:
     - "11211"
+php56:
+  image: jbrinley/php:5.6-fpm
+  volumes:
+    - ~/projects:/srv/www
+  dns:
+    - 10.254.254.254
+    - 8.8.8.8
+  links:
+    - memcached
+  external_links:
+    - core_mysql_1:mysql
+    - core_elasticsearch_1:elasticsearch
 php55:
   image: jbrinley/php:5.5-fpm
   volumes:

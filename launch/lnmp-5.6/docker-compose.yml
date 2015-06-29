@@ -1,0 +1,17 @@
+memcached:
+  extends:
+    file: ../common.yml
+    service: memcached
+php:
+  extends:
+    file: ../common.yml
+    service: php
+  image: jbrinley/php:5.6-fpm
+  links:
+    - memcached
+nginx:
+  extends:
+    file: ../common.yml
+    service: nginx
+  links:
+    - php
