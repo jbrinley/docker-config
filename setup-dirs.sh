@@ -6,7 +6,6 @@ rm -rf compiled/*
 cp -r launch compiled/launch
 cp -r shared-config compiled/shared-config
 
-
 if [ -z "${DOCKER_PROJECT_DIR}" ]; then
 	echo
 	echo "DOCKER_PROJECT_DIR is not set. Defaulting to ~/projects/ for your source code"
