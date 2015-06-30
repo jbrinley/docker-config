@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source ./setup-dirs.sh
+
 # install docker
 echo 'Installing docker via brew'
 brew install docker

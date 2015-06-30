@@ -17,7 +17,7 @@ Elasticsearch
 This Docker config setup makes some assumptions about your local environment.
 
 * You'll need to clone this repository (or symlink it) to a path in your home directory (e.g., `~/system/`).
-* Your projects (WordPress sites, projects, etc) will need to be in `~/projects/`
+* Your projects (WordPress sites, projects, etc) will need to be in `~/projects/`. Note: You can change this default by declaring `$DOCKER_PROJECT_DIR` in your `.bashrc`/`.zshrc`
 
 #### brew
 

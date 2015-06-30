@@ -4,7 +4,7 @@ REPODIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
 if [[ $1 ]]
 then
-	/bin/bash "$REPODIR/launch/$1.sh"
+	/bin/bash "$REPODIR/compiled/launch/$1.sh"
 else
-	/bin/bash "$REPODIR/launch/lnmp.sh"
+	/bin/bash "$REPODIR/compiled/launch/lnmp.sh"
 fi
