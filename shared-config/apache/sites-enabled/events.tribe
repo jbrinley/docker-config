@@ -1,0 +1,24 @@
+<VirtualHost *:80>
+
+  ServerName events.tribe
+  DocumentRoot /srv/www/tribe
+
+  RewriteEngine On
+  RewriteCond %{HTTP_HOST} ^events\.tribe$ [NC]
+  RewriteRule ^(.*)$ http://events.tribe$1 [R=301,L]
+
+  UseCanonicalName Off
+
+  <IfModule mod_ssl.c>
+    SSLEngine off
+  </IfModule>
+
+  <Directory "/srv/www/tribe">
+    Options FollowSymLinks
+    AllowOverride All
+    Order allow,deny
+    Allow from all
+    AcceptPathInfo On
+  </Directory>
+
+</VirtualHost>
